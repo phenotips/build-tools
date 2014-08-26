@@ -96,7 +96,14 @@
     <module name="ClassDataAbstractionCoupling"/>
     -->
 
-    <module name="ClassFanOutComplexity"/>
+    <module name="ClassFanOutComplexity">
+      <property name="excludedClasses" value="boolean, byte, char, double, float, int, long, short, void,
+        Boolean, Byte, Character, Double, Float, Integer, Long, Short, Void,
+        Object, Class, String, StringBuffer, StringBuilder,
+        ArrayIndexOutOfBoundsException, Exception, RuntimeException, IllegalArgumentException, IllegalStateException, IndexOutOfBoundsException, NullPointerException, Throwable, SecurityException, UnsupportedOperationException,
+        List, ArrayList, Deque, Queue, LinkedList, Set, HashSet, SortedSet, TreeSet, Map, HashMap, SortedMap, TreeMap, Collections, Collection, Arrays,
+        Logger, LoggerFactory, StringUtils, Inject, Named, Component, Role, Singleton"/>
+    </module>
 
     <module name="ClassTypeParameterName"/>
 
