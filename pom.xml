@@ -330,5 +330,6 @@
 
   <modules>
     <module>license-resources</module>
+    <module>codestyle-resources</module>
   </modules>
 </project>
