@@ -332,5 +332,6 @@
     <module>license-resources</module>
     <module>license-verification-resources</module>
     <module>codestyle-resources</module>
+    <module>checkstyle-configuration</module>
   </modules>
 </project>
