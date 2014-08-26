@@ -133,36 +133,6 @@
         <version>2.2</version>
       </extension>
     </extensions>
-    <plugins>
-      <!-- Show compiler warnings -->
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <compilerArgument>-Xlint:all</compilerArgument>
-          <showWarnings>true</showWarnings>
-          <showDeprecation>true</showDeprecation>
-        </configuration>
-      </plugin>
-
-      <!-- We want to force packaging the license resources in the produced artifacts -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-remote-resources-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>license-resources</id>
-            <goals>
-              <goal>process</goal>
-            </goals>
-            <configuration>
-              <resourceBundles>
-                <resourceBundle>org.phenotips:phenotips-license-resources:${project.version}</resourceBundle>
-              </resourceBundles>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -213,31 +183,6 @@
           <artifactId>maven-install-plugin</artifactId>
           <!-- Lock down plugin version for build reproducibility -->
           <version>2.5.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <!-- Lock down plugin version for build reproducibility -->
-          <version>3.1</version>
-          <!-- Java 1.7 is required -->
-          <configuration>
-            <source>1.7</source>
-            <target>1.7</target>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <!-- Lock down plugin version for build reproducibility -->
-          <version>2.17</version>
-          <!-- Rule is to put tests in *Test classes -->
-          <configuration>
-            <includes>
-              <include>**/*Test.class</include>
-            </includes>
-            <parallel>classesAndMethods</parallel>
-            <threadCount>2</threadCount>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>

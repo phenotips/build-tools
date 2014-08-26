@@ -32,11 +32,6 @@
   <packaging>jar</packaging>
   <description>License file (License + Notice file containing copyrights).</description>
 
-  <properties>
-    <!-- Disable license processing since this module contains the license files -->
-    <remoteresources.skip>true</remoteresources.skip>
-  </properties>
-
   <build>
     <plugins>
       <plugin>
