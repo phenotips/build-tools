@@ -329,9 +329,11 @@
 
     <!--module name="RegexpHeader"/-->
 
-    <!--module name="RequireThis">
+    <!-- Disabled until https://github.com/checkstyle/checkstyle/pull/274 is included in a release
+    <module name="RequireThis">
       <property name="checkMethods" value="false"/>
-    </module-->
+    </module>
+    -->
 
     <!--module name="RequiredRegexp"/-->
 
