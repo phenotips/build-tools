@@ -13,5 +13,5 @@ Various tools used for [building](https://github.com/phenotips/phenotips/) [Phen
 
 # LICENSE #
 
-PhenoTips and its related tools are distributed under the [LGPL version 2.1](http://www.gnu.org/licenses/lgpl-2.1.html) (GNU Lesser General Public License), a well known free software/open source license recognized both by the Free Software Foundation and the Open Source Initiative.
-This means that every change made to the code must also be distributed under LGPL.
+PhenoTips and its related tools are distributed under the [AGPL version 3](http://www.gnu.org/licenses/agpl-3.0.html) (GNU Affero General Public License), a well known free software/open source license recognized both by the Free Software Foundation and the Open Source Initiative.
+This means that every change made to the code must also be distributed under AGPL, and any composite works that build on top of PhenoTips must use a compatible license.
