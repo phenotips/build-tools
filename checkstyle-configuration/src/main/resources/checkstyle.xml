@@ -228,8 +228,6 @@
 
     <module name="JavaNCSS"/>
 
-    <module name="JUnitTestCase"/>
-
     <module name="LeftCurly">
       <property name="option" value="nl"/>
       <property name="tokens" value="CLASS_DEF,INTERFACE_DEF"/>
@@ -331,10 +329,6 @@
     <module name="RedundantImport"/>
 
     <module name="RedundantModifier"/>
-
-    <module name="RedundantThrows">
-      <property name="allowUnchecked" value="true"/>
-    </module>
 
     <!-- No direct printing to System.out or System.err -->
     <module name="RegexpSinglelineJava">
