@@ -299,5 +299,6 @@
     <module>license-verification-resources</module>
     <module>codestyle-resources</module>
     <module>checkstyle-configuration</module>
+    <module>taglets</module>
   </modules>
 </project>
