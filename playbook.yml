@@ -1,0 +1,56 @@
+---
+- hosts: all
+  vars:
+    phenomecentral_version: 1.0-milestone-7
+    phenomecentral: phenomecentral-standalone-{{ phenomecentral_version }}
+  tasks:
+    - name: install bzip2
+      yum: name=bzip2 state=present
+
+    - name: install epel
+      yum: name=epel-release state=present
+
+    - name: install git
+      yum: name=git state=present
+
+    - name: install java7
+      yum: name=java-1.7.0-openjdk-headless state=present
+
+    - name: install unzip
+      yum: name=unzip state=present
+
+    - name: install maven
+      yum: name=maven state=present
+
+    - name: install tomcat
+      yum: name=tomcat state=present
+
+    ## SET UP PHENOMECENTRAL
+    - name: make sure phenotips is not a directory
+      file: path=/var/lib/phenomecentral state=absent
+
+    - name: make sure phenomecentral is not a directory
+      file: path=/var/lib/phenomecentral state=absent
+
+    - name: download phenomecentral zip
+      get_url: dest=/pc.zip url=http://nexus.cs.toronto.edu/nexus/content/repositories/releases/org/phenomecentral/phenomecentral-standalone/{{ phenomecentral_version }}/{{ phenomecentral }}.zip
+
+    - name: unzip phenomecentral-standalone.zip
+      unarchive: copy=no src=/pc.zip dest=/var/lib/ creates=/var/lib/{{ phenomecentral }} owner=tomcat group=tomcat
+
+    - name: link phenomcentral to unzipped phenomecentral
+      file: src=/var/lib/{{ phenomecentral }} dest=/var/lib/phenomecentral state=link
+
+    - name: link data to /var/lib/phenotips
+      file: src=/var/lib/phenomecentral/data dest=/var/lib/phenotips state=link
+
+    ## SET UP EXOMISER
+    # see /var/lib/exomiser
+    # cron?
+
+    # todo: restart services when appropriate
+
+    ## SET UP TOMCAT
+    - name: copy tomcat config
+      copy: src=catalina-root.xml dest=/etc/tomcat/Catalina/localhost/ROOT.xml owner=tomcat group=tomcat
+
