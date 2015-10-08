@@ -6,10 +6,12 @@ Requires:
 
 - vagrant
 - ansible
+- virtualbox
+
+The machine must have around 50gb of disk space. (Exomiser itself takes
+up 25). `setup.sh` configures virtualbox, but if you're running vagrant on
+another provider, this task is up to you.
 
 Run:
 
-    vagrant up
-    vagrant vbguest
-    vagrant reload
-    vagrant provision
+    ./setup.sh

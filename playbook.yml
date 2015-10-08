@@ -3,6 +3,7 @@
   vars:
     phenomecentral_version: 1.0-milestone-7
     phenomecentral: phenomecentral-standalone-{{ phenomecentral_version }}
+    exomiser: exomiser-cli-7.0.0
   tasks:
     - name: install bzip2
       yum: name=bzip2 state=present
@@ -45,8 +46,16 @@
       file: src=/var/lib/phenomecentral/data dest=/var/lib/phenotips state=link
 
     ## SET UP EXOMISER
-    # see /var/lib/exomiser
-    # cron?
+    - name: make sure exomiser dir exists
+      file: path=/var/lib/exomiser state=directory
+
+    - name: download exomiser zip
+      get_url: dest=/exomiser.zip url=ftp://ftp.sanger.ac.uk/pub/resources/software/exomiser/downloads/exomiser/{{ exomiser }}-distribution.zip
+
+    - name: unzip exomiser
+      unarchive: copy=no src=/exomiser.zip dest=/var/lib/exomiser creates=/var/lib/exomiser/{{ exomiser }}.BETA
+
+    ## SET UP CRON
 
     # todo: restart services when appropriate
 
