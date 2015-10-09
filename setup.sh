@@ -15,7 +15,7 @@ fi
 # The rest of this script is for VirtualBox
 
 vagrant up --no-provision
-vagrant ssh -c "yum install -yq bzip2"
+vagrant ssh -c "sudo yum install -y -q bzip2"
 vagrant vbguest
 vagrant halt
 
@@ -23,21 +23,24 @@ vagrant halt
 # Resize VM's Drive
 #
 
-pushd
-
 VM=`VBoxManage list vms | grep phenomecentral | cut -f1 -d ' ' | tr -d '"'`
-cd ~/VirtualBox VMs/$VM
+pushd "$HOME/VirtualBox VMs/$VM"
 
 DISK=`ls | grep vmdk | sed 's/.vmdk$//'`
 
-VBoxManage clonehd "$DISK".vmdk "$DISK".vdi –format VDI
+echo "Cloning drive..."
+VBoxManage clonemedium disk "$DISK".vmdk "$DISK".vdi --format VDI
 
-VBoxManage modifyhd "$DISK".vdi -–resize 50000
-# detach vmdk
+echo "Growing new drive..."
+VBoxManage modifyhd "$DISK".vdi --resize 50000
+
+echo "Unmounting old drive..."
 VBoxManage storageattach $VM --storagectl 'IDE Controller' --port 0 --device 0 --medium none
-# detach vdi
+
+echo "Mounting new drive..."
 VBoxManage storageattach $VM --storagectl 'IDE Controller' --port 0 --device 0 --medium "$DISK".vdi --type hdd
-# nuke vmdk
+
+echo "Removing old drive..."
 rm -rf "$DISK".vmdk
 popd
 
@@ -45,15 +48,11 @@ popd
 # Resize VM's Partition to encompass new space.
 #
 
-vagrant up
 # make partition in the remaining space with flag 8e
-#vagrant ssh -c "
+vagrant ssh -c "sudo /home/vagrant/sync/makepart.sh"
+vagrant ssh -c "sudo partprobe"
+vagrant ssh -c "sudo pvcreate /dev/sda5"
+vagrant ssh -c "sudo vgextend VolGroup00 /dev/sda5"
+vagrant ssh -c "sudo lvextend /dev/VolGroup00/LogVol00 /dev/sda5"
+vagrant ssh -c "sudo resize2fs /dev/mapper/VolGroup00-LogVol00"
 
-#"
-#vagrant ssh -c "sudo partprobe"
-
-#################################
-# All done. Setup Phenomecentral
-#
-
-#vagrant provision

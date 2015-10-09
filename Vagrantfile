@@ -26,9 +26,14 @@ Vagrant.configure(2) do |config|
     vb.memory = 1024
     vb.cpus = 2
   end
+
   # don't run vbguest on start, we need bzip2 first.
   config.vbguest.auto_update = false
   config.vbguest.no_remote = true
+
+  # disable default synced folder
+  config.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
+  config.vm.synced_folder "./sync/", "/home/vagrant/sync"
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yml"

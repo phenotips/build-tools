@@ -46,11 +46,16 @@
       file: src=/var/lib/phenomecentral/data dest=/var/lib/phenotips state=link
 
     ## SET UP EXOMISER
+
     - name: make sure exomiser dir exists
       file: path=/var/lib/exomiser state=directory
 
+    # gather some stats on the state of exomiser localy
     - name: download exomiser zip
       get_url: dest=/exomiser.zip url=ftp://ftp.sanger.ac.uk/pub/resources/software/exomiser/downloads/exomiser/{{ exomiser }}-distribution.zip
+
+    - name: copy exomiser zip localy
+      fetch: src=/exomiser.zip dest=./exomiser/{{ exomiser }}-distribution.zip flat=yes
 
     - name: unzip exomiser
       unarchive: copy=no src=/exomiser.zip dest=/var/lib/exomiser creates=/var/lib/exomiser/{{ exomiser }}.BETA
