@@ -15,6 +15,7 @@ fi
 # The rest of this script is for VirtualBox
 
 vagrant up --no-provision
+## GuestAdditions require bzip2
 vagrant ssh -c "sudo yum install -y -q bzip2"
 vagrant vbguest
 vagrant halt
