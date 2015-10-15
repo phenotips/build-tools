@@ -3,3 +3,4 @@ nexus_releases_url: http://nexus.cs.toronto.edu/nexus/content/repositories/relea
 phenomecentral_version: 1.0-milestone-7
 phenomecentral: phenomecentral-standalone-{{ phenomecentral_version }}
 exomiser: exomiser-cli-7.0.0
+ansible_python_interpreter: /usr/bin/python2

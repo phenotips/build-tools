@@ -1,3 +1,15 @@
+- name: install java7
+  yum: name=java-1.7.0-openjdk-headless state=present
+
+- name: install unzip
+  yum: name=unzip state=present
+
+- name: install maven
+  yum: name=maven state=present
+
+- name: install tomcat
+  yum: name=tomcat state=present
+
 - name: make sure phenotips is not a directory
   file: path=/var/lib/phenomecentral state=absent
 

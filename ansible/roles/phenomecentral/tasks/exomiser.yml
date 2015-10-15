@@ -1,16 +1,25 @@
+- name: download exomiser localy
+  connection: local
+  sudo: false
+  get_url:
+    dest=./exomiser/{{ exomiser }}-distribution.zip
+    url=ftp://ftp.sanger.ac.uk/pub/resources/software/exomiser/downloads/exomiser/{{ exomiser }}-distribution.zip
+
+- name: install java7
+  yum: name=java-1.7.0-openjdk-headless state=present
+
+- name: install unzip
+  yum: name=unzip state=present
+
 - name: make sure exomiser dir exists
   file: path=/var/lib/exomiser state=directory
 
-- name: gather some stats on the state of exomiser localy
-  stat: path=/home/vagrant/sync/exomiser/{{ exomiser }}-distribution.zip
-  register: exomiser_zip
-
-- name: download exomiser zip
-  get_url: dest=/home/vagrant/sync/exomiser/exomiser.zip url=ftp://ftp.sanger.ac.uk/pub/resources/software/exomiser/downloads/exomiser/{{ exomiser }}-distribution.zip
-  when: exomiser_zip.stat.exists == False
-
 - name: unzip exomiser
-  unarchive: copy=no src=/home/vagrant/sync/exomiser/{{ exomiser }}-distribution.zip dest=/var/lib/exomiser creates=/var/lib/exomiser/{{ exomiser }}.BETA
+  unarchive: src=./exomiser/{{ exomiser }}-distribution.zip dest=/var/lib/exomiser creates=/var/lib/exomiser/{{ exomiser }}.BETA
+
+#################
+## SET UP CRON
+# 
 
 - name: clone patient-network
   git: repo=git@github.com:phenotips/patient-network.git dest=/root/patient-network clone=yes depth=1
