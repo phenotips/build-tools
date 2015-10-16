@@ -10,12 +10,6 @@
 - name: install tomcat
   yum: name=tomcat state=present
 
-- name: make sure phenotips is not a directory
-  file: path=/var/lib/phenomecentral state=absent
-
-- name: make sure phenomecentral is not a directory
-  file: path=/var/lib/phenomecentral state=absent
-
 - name: download phenomecentral zip
   get_url: 
     dest=/pc.zip 
@@ -25,10 +19,10 @@
   unarchive: copy=no src=/pc.zip dest=/var/lib/ creates=/var/lib/{{ phenomecentral }} owner=tomcat group=tomcat
 
 - name: link phenomcentral to unzipped phenomecentral
-  file: src=/var/lib/{{ phenomecentral }} dest=/var/lib/phenomecentral state=link
+  file: src=/var/lib/{{ phenomecentral }} dest=/var/lib/phenomecentral state=link force=yes
 
 - name: link data to /var/lib/phenotips
-  file: src=/var/lib/phenomecentral/data dest=/var/lib/phenotips state=link
+  file: src=/var/lib/phenomecentral/data dest=/var/lib/phenotips state=link force=yes
 
 # SET UP TOMCAT
 - name: copy tomcat config
