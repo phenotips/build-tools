@@ -10,6 +10,9 @@
 - name: install tomcat
   yum: name=tomcat state=present
 
+- name: install tomcat
+  yum: name=tomcat state=present
+
 - name: download phenomecentral zip
   get_url: 
     dest=/pc.zip 

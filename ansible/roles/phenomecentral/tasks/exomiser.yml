@@ -24,6 +24,7 @@
 ## SET UP CRON
 # 
 
-# copy patient-network crons to /root/cron
+- name: copy patient-network crons to /root/cron
+  copy: src=../../patient-network/scripts/ dest=/root/cron owner=root group=root
 
 # todo: restart services when appropriate
