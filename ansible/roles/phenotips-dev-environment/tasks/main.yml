@@ -1,0 +1,13 @@
+---
+- name: clone repos from phenotips organization
+  git: 
+    accept_hostkey=yes
+    repo=git@github.com:phenotips/{{ item }}.git
+    dest=test/{{ item }}
+    clone=yes
+    update=yes
+  with_items:
+    - build-tools
+    - phenotips
+    - patient-network
+    - phenomecentral.org
