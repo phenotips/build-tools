@@ -3,7 +3,7 @@
   git: 
     accept_hostkey=yes
     repo=git@github.com:phenotips/{{ item }}.git
-    dest=test/{{ item }}
+    dest=../../{{ item }}
     clone=yes
     update=yes
   with_items:
