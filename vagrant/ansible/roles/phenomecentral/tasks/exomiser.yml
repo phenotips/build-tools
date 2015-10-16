@@ -1,0 +1,29 @@
+- name: download exomiser localy
+  connection: local
+  sudo: false
+  get_url:
+    dest=./exomiser/{{ exomiser }}-distribution.zip
+    url=ftp://ftp.sanger.ac.uk/pub/resources/software/exomiser/downloads/exomiser/{{ exomiser }}-distribution.zip
+
+- name: install java7
+  yum: name=java-1.7.0-openjdk-headless state=present
+
+- name: install unzip
+  yum: name=unzip state=present
+
+- name: make sure exomiser dir exists
+  file: path=/var/lib/exomiser state=directory
+
+- name: unzip exomiser
+  unarchive: 
+    src=./exomiser/{{ exomiser }}-distribution.zip 
+    dest=/var/lib/exomiser 
+    creates=/var/lib/exomiser/{{ exomiser }}/
+
+#################
+## SET UP CRON
+# 
+
+# copy patient-network crons to /root/cron
+
+# todo: restart services when appropriate

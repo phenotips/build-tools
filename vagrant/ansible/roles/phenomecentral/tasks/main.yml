@@ -1,0 +1,16 @@
+---
+- name: install epel
+  yum: name=epel-release state=present
+
+- name: install git
+  yum: name=git state=present
+
+- include: phenomecentral.yml
+- include: exomiser.yml
+
+
+## TODO: These files are non-standard on phenomecentral
+#hibernate.cfg.xml
+#xwiki.cfg
+#xwiki.properties
+#web.xml
