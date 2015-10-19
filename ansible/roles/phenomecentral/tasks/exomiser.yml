@@ -2,7 +2,7 @@
   connection: local
   sudo: false
   get_url:
-    dest=./exomiser/{{ exomiser }}-distribution.zip
+    dest={{ base_devdir }}/exomiser/{{ exomiser }}-distribution.zip
     url=ftp://ftp.sanger.ac.uk/pub/resources/software/exomiser/downloads/exomiser/{{ exomiser }}-distribution.zip
 
 - name: install java7
@@ -15,16 +15,27 @@
   file: path=/var/lib/exomiser state=directory
 
 - name: unzip exomiser
-  unarchive: 
-    src=./exomiser/{{ exomiser }}-distribution.zip 
-    dest=/var/lib/exomiser 
+  unarchive:
+    src={{ base_devdir }}/exomiser/{{ exomiser }}-distribution.zip
+    dest=/var/lib/exomiser
     creates=/var/lib/exomiser/{{ exomiser }}/
 
 #################
 ## SET UP CRON
-# 
-
+#
 - name: copy patient-network crons to /root/cron
-  copy: src=../../patient-network/scripts/ dest=/root/cron owner=root group=root
+  copy: src={{ base_devdir }}/patient-network/scripts/ dest=/root/cron
 
-# todo: restart services when appropriate
+- name: copy exomiser unit
+  copy: src=exomiser.service dest=/etc/systemd/system/
+
+- name: enable exomiser unit
+  service: name=exomiser.service enabled=yes
+
+- name: copy exomiser timer
+  copy: src=exomiser.timer dest=/etc/systemd/system/
+
+- name: enable exomiser timer
+  service: name=exomiser.timer enabled=no
+
+#TODO: add idcheckerservice user to phenotips, store in /var/lib/exomiser/exomiser.credentials

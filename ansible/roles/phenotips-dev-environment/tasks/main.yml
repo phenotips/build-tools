@@ -1,9 +1,9 @@
 ---
 - name: clone repos from phenotips organization
-  git: 
+  git:
     accept_hostkey=yes
     repo=git@github.com:phenotips/{{ item }}.git
-    dest=../../{{ item }}
+    dest={{ base_devdir }}/{{ item }}
     clone=yes
     update=yes
   with_items:

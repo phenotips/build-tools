@@ -2,9 +2,6 @@
 - name: install epel
   yum: name=epel-release state=present
 
-- name: install git
-  yum: name=git state=present
-
 - include: phenomecentral.yml
 - include: exomiser.yml
 

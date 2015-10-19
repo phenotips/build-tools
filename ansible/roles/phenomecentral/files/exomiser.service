@@ -1,0 +1,6 @@
+[Unit]
+Description=Run Exomiser on new patients in PhenomeCentral
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /root/cron/exomiser_cron.sh

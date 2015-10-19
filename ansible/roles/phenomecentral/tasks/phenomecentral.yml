@@ -10,24 +10,28 @@
 - name: install tomcat
   yum: name=tomcat state=present
 
-- name: install tomcat
-  yum: name=tomcat state=present
-
 - name: download phenomecentral zip
-  get_url: 
-    dest=/pc.zip 
+  get_url:
+    dest=/pc.zip
     url={{ nexus_releases_url }}/org/phenomecentral/phenomecentral-standalone/{{ phenomecentral_version }}/{{ phenomecentral }}.zip
 
 - name: unzip phenomecentral-standalone.zip
   unarchive: copy=no src=/pc.zip dest=/var/lib/ creates=/var/lib/{{ phenomecentral }} owner=tomcat group=tomcat
 
+- name: link phenotips to phenomecentral
+  file: src=/var/lib/phenomecentral dest=/var/lib/phenotips state=link force=yes
+
 - name: link phenomcentral to unzipped phenomecentral
   file: src=/var/lib/{{ phenomecentral }} dest=/var/lib/phenomecentral state=link force=yes
-
-- name: link data to /var/lib/phenotips
-  file: src=/var/lib/phenomecentral/data dest=/var/lib/phenotips state=link force=yes
 
 # SET UP TOMCAT
 - name: copy tomcat config
   copy: src=catalina-root.xml dest=/etc/tomcat/Catalina/localhost/ROOT.xml owner=tomcat group=tomcat
+  notify:
+    - restart tomcat
 
+## TODO: These files are non-standard on phenomecentral. find out why.
+#hibernate.cfg.xml
+#xwiki.cfg
+#xwiki.properties
+#web.xml

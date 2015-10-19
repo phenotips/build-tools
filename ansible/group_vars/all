@@ -1,0 +1,4 @@
+---
+# base dev directory where all phenotips related repositories sit.
+#   assuming we are in { base_devdir }/build-tools/ansible/
+base_devdir: ../..

@@ -1,5 +1,9 @@
 ---
 - hosts: all
   sudo: true
+  vars:
+    # base dev directory where all phenotips related repositories sit.
+    #   assuming we are in { base_devdir }/build-tools/vagrant-*/
+    base_devdir: ../..
   roles:
     - phenomecentral
