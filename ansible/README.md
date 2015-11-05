@@ -21,3 +21,9 @@ $YOUR_DEV_DIR
 └── phenotips/
 
 ```
+
+# Usage example:
+
+    $ ansible-playbook --ask-become-pass phenomecentral.yml -i YOUR_HOST_FILE
+
+As a guide to setting up the hostfile, see http://docs.ansible.com/ansible/playbooks_best_practices.html

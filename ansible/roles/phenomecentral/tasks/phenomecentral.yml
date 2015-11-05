@@ -17,12 +17,26 @@
 
 - name: unzip phenomecentral-standalone.zip
   unarchive: copy=no src=/pc.zip dest=/var/lib/ creates=/var/lib/{{ phenomecentral }} owner=tomcat group=tomcat
+  notify:
+    - restart tomcat
 
 - name: link phenotips to phenomecentral
   file: src=/var/lib/phenomecentral dest=/var/lib/phenotips state=link force=yes
+  notify:
+    - restart tomcat
 
 - name: link phenomcentral to unzipped phenomecentral
   file: src=/var/lib/{{ phenomecentral }} dest=/var/lib/phenomecentral state=link force=yes
+  notify:
+    - restart tomcat
+
+- name: set environment.pernamentDirectory in xwiki.properties
+  lineinfile:
+    dest=/var/lib/phenomecentral/webapps/phenotips/WEB-INF/xwiki.properties
+    regexp="^environment.permanentDirectory="
+    line="environment.permanentDirectory=/var/lib/phenomecentral/data"
+  notify:
+    - restart tomcat
 
 # SET UP TOMCAT
 - name: copy tomcat config
@@ -35,3 +49,5 @@
 #xwiki.cfg
 #xwiki.properties
 #web.xml
+
+# TODO: Setup mysql

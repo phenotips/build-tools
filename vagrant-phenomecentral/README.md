@@ -8,14 +8,11 @@ Requires:
 - [Ansible](http://ansible.com/)
 - [Virtualbox](http://virtualbox.org/)
 
-The machine must have around 50gb of disk space. (Exomiser itself takes
-up 25). `setup.sh` takes care of this for you by configuring Virtualbox, but if
-you're running Vagrant on another provider (not Virtualbox), or on Windows,
-this task is up to you.
+The machine must have around 40gb of disk space once running. Make sure you have enough space on your HD.
 
 Run:
 
-    $ ./setup.sh
-    $ vagrant provision
+    $ vagrant up
+    $ vagrant ssh
 
 ## Development

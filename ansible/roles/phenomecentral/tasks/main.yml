@@ -5,9 +5,3 @@
 - include: phenomecentral.yml
 - include: exomiser.yml
 
-
-## TODO: These files are non-standard on phenomecentral
-#hibernate.cfg.xml
-#xwiki.cfg
-#xwiki.properties
-#web.xml
