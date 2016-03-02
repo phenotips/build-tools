@@ -273,12 +273,12 @@
     <module name="ModifierOrder"/>
 
     <module name="MultipleStringLiterals">
-      <property name="ignoreStringsRegexp" value='^("")|("[0-9]")|(" ")|("\]")$'/>
+      <property name="ignoreStringsRegexp" value='^("")|("[0-9]")|(" ")|("\]")|("\[")|(",")|(", ")|("/")$'/>
       <property name="allowedDuplicates" value="4"/>
     </module>
 
     <module name="MultipleStringLiterals">
-      <property name="ignoreStringsRegexp" value='^("")|("[0-9]")|(" ")|("\]")$'/>
+      <property name="ignoreStringsRegexp" value='^("")|("[0-9]")|(" ")|("\]")|("\[")|(",")|(", ")|("/")$'/>
       <property name="severity" value="warning"/>
     </module>
 
