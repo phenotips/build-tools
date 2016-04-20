@@ -3,5 +3,7 @@
   yum: name=epel-release state=present
 
 - include: phenomecentral.yml
-- include: exomiser.yml
+#- include: exomiser.yml
+- include: mysql.yml
+  when: use_mysql
 

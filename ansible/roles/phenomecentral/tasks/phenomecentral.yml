@@ -14,27 +14,58 @@
   get_url:
     dest=/pc.zip
     url={{ nexus_releases_url }}/org/phenomecentral/phenomecentral-standalone/{{ phenomecentral_version }}/{{ phenomecentral }}.zip
+  when: pull_phenomecentral_from_nexus
+
+- name: push zip from target dir
+  copy:
+    dest=/pc.zip
+    src={{ base_devdir }}/phenomecentral.org/standalone/target/{{ phenomecentral }}.zip
+  when: not pull_phenomecentral_from_nexus
 
 - name: unzip phenomecentral-standalone.zip
-  unarchive: copy=no src=/pc.zip dest=/var/lib/ creates=/var/lib/{{ phenomecentral }} owner=tomcat group=tomcat
+  unarchive: copy=no src=/pc.zip dest={{ phenomecentral_parent_dir }} creates={{ phenomecentral_dir }} owner=tomcat group=tomcat
   notify:
     - restart tomcat
 
 - name: link phenotips to phenomecentral
-  file: src=/var/lib/phenomecentral dest=/var/lib/phenotips state=link force=yes
+  file: src={{ phenomecentral_dir }} dest=/var/lib/phenotips state=link force=yes
   notify:
     - restart tomcat
 
 - name: link phenomcentral to unzipped phenomecentral
-  file: src=/var/lib/{{ phenomecentral }} dest=/var/lib/phenomecentral state=link force=yes
+  file: src={{ phenomecentral_dir }} dest=/var/lib/phenomecentral state=link force=yes
   notify:
     - restart tomcat
 
 - name: set environment.pernamentDirectory in xwiki.properties
   lineinfile:
-    dest=/var/lib/phenomecentral/webapps/phenotips/WEB-INF/xwiki.properties
+    dest={{ phenomecentral_dir }}/webapps/phenotips/WEB-INF/xwiki.properties
     regexp="^environment.permanentDirectory="
-    line="environment.permanentDirectory=/var/lib/phenomecentral/data"
+    line="environment.permanentDirectory=/var/lib/phenotips/data"
+  notify:
+    - restart tomcat
+
+- name: store file attachements on the filesystem
+  lineinfile:
+    dest={{ phenomecentral_dir }}/webapps/phenotips/WEB-INF/xwiki.cfg
+    regexp="xwiki.store.attachment.hint="
+    line="xwiki.store.attachment.hint=file"
+  notify:
+    - restart tomcat
+
+- name: store file attachement versions on the filesystem
+  lineinfile:
+    dest={{ phenomecentral_dir }}/webapps/phenotips/WEB-INF/xwiki.cfg
+    regexp="xwiki.store.attachment.versioning.hint="
+    line="xwiki.store.attachment.versioning.hint=file"
+  notify:
+    - restart tomcat
+
+- name: store file attachement recyclebins on the filesystem
+  lineinfile:
+    dest={{ phenomecentral_dir }}/webapps/phenotips/WEB-INF/xwiki.cfg
+    regexp="xwiki.store.attachment.recyclebin.hint="
+    line="xwiki.store.attachment.recyclebin.hint=file"
   notify:
     - restart tomcat
 

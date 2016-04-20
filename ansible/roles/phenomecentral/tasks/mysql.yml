@@ -1,0 +1,39 @@
+- name: install mysql (mariadb)
+  yum: name=mariadb state=present
+  notify:
+    - restart mysql
+    - restart tomcat
+
+- name: install mysql-python for ansible
+  yum: name=MySQL-python state=present
+
+- name: make mysql user
+  mysql_user: name=phenotips password=phenotips priv=*.*:ALL,GRANT state=present
+  notify:
+    - restart mysql
+    - restart tomcat
+
+- name: make mysql db
+  mysql_db: name=prod state=present 
+  notify:
+    - restart mysql
+    - restart tomcat
+
+- name: set hibernate.cfg
+  template:
+    src=hibernate.cfg.xml
+    dest={{ phenomecentral_dir }}/webapps/phenotips/WEB-INF/hibernate.cfg.xml
+    owner=tomcat
+    group=tomcat
+  notify:
+    - restart tomcat
+
+- name: set xwiki mysql db
+  lineinfile:
+    dest={{ phenomecentral_dir }}/webapps/phenotips/WEB-INF/xwiki.cfg
+    regexp="xwiki.db="
+    line="xwiki.db={{ db_table }}"
+  notify:
+    - restart tomcat
+
+# TODO: copy hibernate.cfg.xml

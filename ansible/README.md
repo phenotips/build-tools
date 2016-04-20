@@ -27,3 +27,10 @@ $YOUR_DEV_DIR
     $ ansible-playbook --ask-become-pass phenomecentral.yml -i YOUR_HOST_FILE
 
 As a guide to setting up the hostfile, see http://docs.ansible.com/ansible/playbooks_best_practices.html
+
+# TODO:
+
+- updating a running instance (see the **broken** [phenotips upgrade scritpt](https://phenotips.org/AdminGuide/Upgrade))
+   - update on version change?
+   - update on .zip file differences?
+   - downgrade procedures?

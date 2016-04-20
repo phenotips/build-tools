@@ -1,6 +1,12 @@
 ---
+pull_phenomecentral_from_nexus: yes
 nexus_releases_url: http://nexus.cs.toronto.edu/nexus/content/repositories/releases/
 phenomecentral_version: 1.0-milestone-7
 phenomecentral: phenomecentral-standalone-{{ phenomecentral_version }}
+phenomecentral_parent_dir: /var/lib/
+phenomecentral_dir: "{{ phenomecentral_parent_dir }}{{ phenomecentral }}"
 exomiser: exomiser-cli-7.0.0
 ansible_python_interpreter: /usr/bin/python2
+db_user: root
+db_pass: ""
+db_table: "prod"
