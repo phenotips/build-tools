@@ -1,0 +1,5 @@
+---
+pull_phenomecentral_from_nexus: no
+phenomecentral_version: 1.0-SNAPSHOT
+use_mysql: yes
+phenomecentral_parent_dir: /home/phenomecentral/

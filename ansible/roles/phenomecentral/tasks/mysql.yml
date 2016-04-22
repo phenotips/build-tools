@@ -35,5 +35,3 @@
     line="xwiki.db={{ db_table }}"
   notify:
     - restart tomcat
-
-# TODO: copy hibernate.cfg.xml

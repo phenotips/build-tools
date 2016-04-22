@@ -1,0 +1,20 @@
+## ~/.ssh/config --->
+#
+#TCPKeepAlive=yes
+#ServerAliveInterval=15
+#ServerAliveCountMax=6
+#Compression=yes
+#ControlMaster auto
+#ControlPath /tmp/%r@%h:%p
+#ControlPersist yes
+#
+#Host pc phenomecentral.ccm.sickkids.ca
+#    HostName phenomecentral.ccm.sickkids.ca
+#    User user
+#
+#Host vsdemo
+#    User user
+#    ProxyCommand ssh phenomecentral.ccm.sickkids.ca exec nc %h %p
+
+vsdemo
+
