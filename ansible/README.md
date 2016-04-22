@@ -28,6 +28,9 @@ $YOUR_DEV_DIR
 
 As a guide to setting up the hostfile, see http://docs.ansible.com/ansible/playbooks_best_practices.html
 
+Generally, you'd have multiple host files, and customize each host in
+`./host_vars/$host`.
+
 # TODO:
 
 - updating a running instance (see the **broken** [phenotips upgrade scritpt](https://phenotips.org/AdminGuide/Upgrade))
