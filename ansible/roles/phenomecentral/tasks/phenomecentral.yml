@@ -23,7 +23,7 @@
   when: not pull_phenomecentral_from_nexus
 
 - name: unzip phenomecentral-standalone.zip
-  unarchive: copy=no src=/pc.zip dest={{ phenomecentral_parent_dir }} creates={{ phenomecentral_dir }} owner=tomcat group=tomcat
+  unarchive: copy=no src=/pc.zip dest={{ phenomecentral_parent_dir }} owner=tomcat group=tomcat
   notify:
     - restart tomcat
 
