@@ -17,5 +17,8 @@ atlassian-ide-plugin.xml
 .fbprefs
 bin
 
+# Ansible
+*.retry
+
 .DS_Store
 *~
