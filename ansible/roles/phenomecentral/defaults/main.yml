@@ -1,6 +1,6 @@
 ---
 pull_phenomecentral_from_nexus: yes
-nexus_releases_url: http://nexus.cs.toronto.edu/nexus/content/repositories/releases/
+nexus_releases_url: https://nexus.phenotips.org/nexus/content/repositories/releases/
 phenomecentral_version: 1.0-milestone-7
 phenomecentral: phenomecentral-standalone-{{ phenomecentral_version }}
 phenomecentral_parent_dir: /var/lib/
