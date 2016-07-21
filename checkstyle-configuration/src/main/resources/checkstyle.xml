@@ -182,7 +182,9 @@
 
     <!--module name="IllegalCatch"/-->
 
-    <module name="IllegalImport"/>
+    <module name="IllegalImport">
+      <property name="illegalPkgs" value="sun,groovy,org.apache.commons.lang,org.apache.commons.codec.binary,antlr"/>
+    </module>
 
     <module name="IllegalInstantiation">
       <property name="classes" value="java.lang.Boolean, java.lang.String"/>
