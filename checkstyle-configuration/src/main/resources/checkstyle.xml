@@ -82,6 +82,8 @@
   <module name="Translation"/>
   -->
 
+  <module name="UniqueProperties"/>
+
   <!--
      ======================================================================================
        Checks that require a TreeWalker (sorted alphabetically)
@@ -93,10 +95,11 @@
          severity. This is because we'd like to make the build fail on error for those checks
          but there are errors to fix first -->
 
-    <module name="AbstractClassName">
-      <!-- We need to override the default format since by default classes ending with Factory are considered
-           abstract and thus need to be defined with the "abstract" keyword. -->
-      <property name="format" value="^Abstract.*$"/>
+    <!-- Not used because we want to use abstract classes as SPI declarations, without requiring an ugly Abstract* prefix -->
+    <!--module name="AbstractClassName"/-->
+
+    <module name="AnnotationLocation">
+      <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
     </module>
 
     <module name="AnonInnerLength"/>
@@ -107,9 +110,18 @@
 
     <!--module name="AvoidInlineConditionals"/-->
 
+    <module name="AtclauseOrder">
+      <property name="tagOrder" value="@param, @return, @throws, @exception, @see, @version, @since, @deprecated"/>
+    </module>
+
+    <!-- We allow escapes so that the source code can be checked out on non-UTF systems -->
+    <!--module name="AvoidEscapedUnicodeCharacters"/-->
+
     <module name="AvoidNestedBlocks"/>
 
     <module name="AvoidStarImport"/>
+
+    <module name="AvoidStaticImport"/>
 
     <module name="BooleanExpressionComplexity"/>
 
@@ -125,6 +137,8 @@
     </module>
 
     <module name="ClassTypeParameterName"/>
+
+    <module name="CommentsIndentation"/>
 
     <module name="ConstantName"/>
 
@@ -145,6 +159,8 @@
     <module name="EmptyBlock">
       <property name="option" value="text"/>
     </module>
+
+    <module name="EmptyCatchBlock"/>
 
     <module name="EmptyForInitializerPad"/>
 
@@ -195,7 +211,9 @@
 
     <module name="IllegalThrows"/>
 
-    <!--module name="IllegalToken"/-->
+    <module name="IllegalToken">
+      <property name="tokens" value="LITERAL_NATIVE,LABELED_STAT"/>
+    </module>
 
     <!--module name="IllegalTokenText"/-->
 
@@ -215,14 +233,23 @@
 
     <module name="InnerAssignment"/>
 
-    <!--module name="InterfaceIsType"/-->
+    <module name="InterfaceIsType"/>
+
+    <module name="InterfaceTypeParameterName">
+      <property name="format" value="^[A-Z]{1,2}$"/>
+    </module>
 
     <module name="JavadocMethod">
       <property name="scope" value="public"/>
       <property name="allowUndeclaredRTE" value="true"/>
     </module>
 
+    <!-- Too strict at the moment -->
+    <!--module name="JavadocParagraph"/-->
+
     <module name="JavadocStyle"/>
+
+    <module name="JavadocTagContinuationIndentation"/>
 
     <module name="JavadocType">
       <property name="scope" value="public"/>
@@ -237,7 +264,7 @@
 
     <module name="LeftCurly">
       <property name="option" value="nl"/>
-      <property name="tokens" value="CLASS_DEF,INTERFACE_DEF"/>
+      <property name="tokens" value="CLASS_DEF,INTERFACE_DEF,ANNOTATION_DEF,ENUM_DEF,CTOR_DEF,METHOD_DEF,OBJBLOCK"/>
     </module>
 
     <module name="LineLength">
@@ -307,6 +334,10 @@
 
     <!--module name="NoClone"/-->
 
+    <module name="NoLineWrap"/>
+
+    <module name="NonEmptyAtclauseDescription"/>
+
     <!--module name="NoFinalizer"/-->
 
     <module name="NoWhitespaceAfter">
@@ -324,6 +355,9 @@
     <module name="OuterTypeFilename"/>
 
     <module name="OuterTypeNumber"/>
+
+    <!-- This can clash with DeclarationOrder, since it forces methods with different modifiers close together. -->
+    <!--module name="OverloadMethodsDeclarationOrder"/-->
 
     <module name="PackageAnnotation"/>
 
@@ -355,11 +389,10 @@
 
     <!--module name="RegexpHeader"/-->
 
-    <!-- Disabled until https://github.com/checkstyle/checkstyle/pull/274 is included in a release
     <module name="RequireThis">
       <property name="checkMethods" value="false"/>
+      <property name="validateOnlyOverlapping" value="false"/>
     </module>
-    -->
 
     <!--module name="RequiredRegexp"/-->
 
@@ -372,9 +405,21 @@
 
     <module name="RightCurly"/>
 
+    <module name="SeparatorWrap">
+      <property name="tokens" value="COMMA"/>
+      <property name="option" value="eol"/>
+    </module>
+
+    <module name="SeparatorWrap">
+      <property name="tokens" value="DOT"/>
+      <property name="option" value="nl"/>
+    </module>
+
     <module name="SimplifyBooleanExpression"/>
 
     <module name="SimplifyBooleanReturn"/>
+
+    <module name="SingleSpaceSeparator"/>
 
     <module name="StaticVariableName"/>
 
