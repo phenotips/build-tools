@@ -186,13 +186,6 @@
 
     <module name="GenericWhitespace"/>
 
-    <!-- Avoid finalizers (this will not find violations that contain linebreaks) -->
-    <module name="RegexpSinglelineJava">
-      <property name="format" value="((public)|(protected))\s+void\s+finalize\(\s*\)"/>
-      <property name="message" value="Avoid finalizers"/>
-      <property name="ignoreComments" value="true"/>
-    </module>
-
     <module name="HiddenField">
       <property name="tokens" value="VARIABLE_DEF"/>
     </module>
@@ -338,7 +331,7 @@
 
     <module name="NonEmptyAtclauseDescription"/>
 
-    <!--module name="NoFinalizer"/-->
+    <module name="NoFinalizer"/>
 
     <module name="NoWhitespaceAfter">
       <property name="tokens" value="BNOT, DEC, DOT, INC, LNOT, UNARY_MINUS, UNARY_PLUS"/>
@@ -464,7 +457,6 @@
 
     <module name="VisibilityModifier">
       <property name="protectedAllowed" value="true"/>
-      <property name="publicMemberPattern" value="^[a-z][a-zA-Z0-9]*$"/>
     </module>
 
     <module name="WhitespaceAfter"/>
