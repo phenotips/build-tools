@@ -6,9 +6,9 @@ It takes as input a file with a series of lines in the following format:
 
 where:
 - <sex> is 1 for boys, 2 for girls; if the data is valid for both sexes, use 1
-- <age> is the age in months, starting with 0 for birth
+- <age> is the age in days, starting with 0 for birth; a year has 365.2425 days, and a month has 30.436875 days, rounded down
 - <low value> is the value for the lower percentile, 3% or 5%, depending on the chart; it can be a SD curve instead of a percentile curve
-- <middle value> is the value for the 50% percentile
+- <middle value> is the value for the 50% percentile (0SD)
 - <high value> is the value for the upper percentile, 97% or 95%, depending on the chart; this percentile should be symmetrical with the lower one: 3 and 97, or 5 and 95
 
 For example:
