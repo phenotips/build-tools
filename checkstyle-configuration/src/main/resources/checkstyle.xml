@@ -131,7 +131,7 @@
     <module name="ClassDataAbstractionCoupling"/>
 
     <module name="ClassFanOutComplexity">
-      <property name="excludedPackages" value="java.io, java.util, java.util.concurrent, java.util.concurrent.atomic, java.util.function, java.util.stream, javax.annotation, javax.inject, org.apache.commons.collections4, org.apache.commons.lang3, org.json, org.slf4j, org.xwiki.component.annotation"/>
+      <property name="excludedPackages" value="java.io, java.util, java.util.concurrent, java.util.concurrent.atomic, java.util.function, java.util.stream, javax.annotation, javax.inject, javax.servlet, org.apache.commons.collections4, org.apache.commons.lang3, org.json, org.slf4j, org.xwiki.component.annotation, org.apache.sling.servlets.annotations, org.osgi.service.component.annotations"/>
     </module>
 
     <!-- We use the opposite, RedundantModifier -->
