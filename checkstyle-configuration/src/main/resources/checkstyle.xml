@@ -43,6 +43,12 @@
   </module>
   -->
 
+  <module name="LineLength">
+    <!-- @(\w+\.)+\w+::\w+\( stands for JSNI method calls: @my.package.MyClass::myMethod() -->
+    <property name="ignorePattern" value="(@version|@see|@link|^import|@(\w+\.)+\w+::\w+\()"/>
+    <property name="max" value="120"/>
+  </module>
+
   <module name="NewlineAtEndOfFile">
     <property name="fileExtensions" value="java, xml, js, css, vm"/>
   </module>
@@ -269,12 +275,6 @@
     <module name="LeftCurly">
       <property name="option" value="nl"/>
       <property name="tokens" value="CLASS_DEF,INTERFACE_DEF,ANNOTATION_DEF,ENUM_DEF,CTOR_DEF,METHOD_DEF,OBJBLOCK"/>
-    </module>
-
-    <module name="LineLength">
-      <!-- @(\w+\.)+\w+::\w+\( stands for JSNI method calls: @my.package.MyClass::myMethod() -->
-      <property name="ignorePattern" value="(@version|@see|@link|^import|@(\w+\.)+\w+::\w+\()"/>
-      <property name="max" value="120"/>
     </module>
 
     <module name="LocalFinalVariableName"/>
